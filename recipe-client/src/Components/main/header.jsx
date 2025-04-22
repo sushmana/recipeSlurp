@@ -7,7 +7,7 @@ import {getRecipes} from '../../redux/reducers/recipes'
 const Header = () => {
 
   const dispatch = useDispatch();
-  const {searchTerm, setSearchTerm} = useState(131131);
+  const [searchTerm, setSearchTerm] = useState('');
   const handleSearch = (searchTerm) =>{
     console.log("Search button clicked", searchTerm);
 
@@ -16,10 +16,10 @@ const Header = () => {
   return (
       <>
       <div class='flex flex-row justify-center items-center content-center my-10 w-auto h-10 bg-gray rounded-lg shadow-md font-bold'>
-           <input type='input' placeholder='Search' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} class='p-2 rounded-lg hover:cursor-pointer'/>
+           <input type='input' placeholder='Search' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} className='p-2 rounded-lg hover:cursor-pointer'/>
          
-            <button type='submit' class='bg-gray-200 rounded-lg p-2 hover:bg-gray-300' onClick={handleSearch(searchTerm)}>
-            <CiSearch class='text-blue-500'/>
+            <button type='submit' className='bg-gray-200 rounded-lg p-2 hover:bg-gray-300' onClick={handleSearch}>
+            <CiSearch className='text-blue-500'/>
             </button>
       </div>
       </>

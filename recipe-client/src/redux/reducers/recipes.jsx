@@ -6,12 +6,8 @@ export const Recipe = createSlice({
   initialState: [],
   reducers: {
     RECIPE_LIST: (state, action) => {
-      const todo = {
-        // id: uuid(),
-        text: action.payload,
-      };
       console.log('action', action)
-      state.push(todo);
+      // state.push(todo);
   },
 }
 });
