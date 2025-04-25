@@ -1,2 +1,0 @@
-export const RECIPE_LIST = "RECIPE_LIST";
-export const SET_RECIPE_LIST = "SET_RECIPE_LIST";
