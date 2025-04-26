@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import Main from './Components/main'
+import RecipeDetail from './Components/recipedetail'
+import "./i18n";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     // <div className="App">
@@ -21,7 +24,16 @@ function App() {
     // </div>
 
     <>
-    <Main/>
+    {/* <Navbar /> */}
+    <Routes>
+    <Route path="/" element={<Main />} />
+    <Route path="/recipeDetail/:id" element={<RecipeDetail />} />
+    {/* <Route index element={<Home />} />
+    <Route path="blogs" element={<Blogs />} />
+    <Route path="contact" element={<Contact />} />
+    <Route path="about" element={<About />} />
+    <Route path="*" element={<NoPage />} /> */}
+    </Routes>
     </>
   );
 }

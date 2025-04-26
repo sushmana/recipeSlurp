@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import './card.css'
-import {PacmanLoader} from 'react-spinners';
+import {PacmanLoader, DotLoader } from 'react-spinners';
+import { useTranslation } from "react-i18next";
+import {Link}  from "react-router-dom";
 
 const Card = () => {
+  const { t } = useTranslation();
+
   const recipes = useSelector((state) => state.recipeReducer.recipeData);
   const isLoading = useSelector((state) => state.recipeReducer.isLoading);
   const dispatch = useDispatch();
@@ -13,8 +17,10 @@ const Card = () => {
     <>
     {isLoading && 
     (<>
-    <div className="spinner"/>
-     {/* <PacmanLoader size={150} color="#36d7b7" loading={isLoading} /> */}
+    {/* <div className="spinner"/> */}
+    <div className="flex justify-center items-center ">
+     <DotLoader size={50} color="gray" loading={isLoading} />
+    </div>
     </>
     )}
     <div className="flex flex-wrap justify-center gap-6 p-6 bg-black rounded-lg shadow-md">
@@ -23,7 +29,7 @@ const Card = () => {
           recipes.map((data, index) => {
             // Ensure data.meals exists and is an array
             if (!data?.meals || !Array.isArray(data.meals)) {
-              return (<h3 className="text-2xl text-pink-700">No Recipes Found</h3>);
+              return (<h3 className="text-2xl text-pink-700">No Recipe Found</h3>);
             }
 
             return data.meals.map((meal, mealIndex) => (
@@ -45,7 +51,11 @@ const Card = () => {
                 <div className="flex gap-2 mt-2 text-red-500">
                   <MdFavoriteBorder />
                   <MdFavorite />
+                  <Link to={`/recipeDetail/${meal.idMeal}`} className="text-blue-700 hover:underline">
+                    View Recipe
+                  </Link>
                 </div>
+                
               </div>
             ));
           })}
