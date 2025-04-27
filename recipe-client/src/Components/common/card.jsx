@@ -5,6 +5,7 @@ import './card.css'
 import {PacmanLoader, DotLoader } from 'react-spinners';
 import { useTranslation } from "react-i18next";
 import {Link}  from "react-router-dom";
+import {getRecipesDetail} from '../../redux/slices/recipes'
 
 const Card = () => {
   const { t } = useTranslation();
@@ -51,7 +52,7 @@ const Card = () => {
                 <div className="flex gap-2 mt-2 text-red-500">
                   <MdFavoriteBorder />
                   <MdFavorite />
-                  <Link to={`/recipeDetail/${meal.idMeal}`} className="text-blue-700 hover:underline">
+                  <Link to={`/recipeDetail/${meal.idMeal}`} className="text-blue-700 hover:underline" onClick={() => dispatch(getRecipesDetail,meal.idMeal)}>
                     View Recipe
                   </Link>
                 </div>

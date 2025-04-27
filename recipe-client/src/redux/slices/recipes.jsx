@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import recipeDetailSaga from '../saga/recipeDetailSaga';
 
 export const RecipeSlice = createSlice({
   name: 'recipe',
@@ -6,16 +7,28 @@ export const RecipeSlice = createSlice({
     recipeData: [],
     isLoading: false,
     error: null,
+    recipeDetailData: [],
+    isLoadingDetail: false,
   },
   reducers: {
     getRecipes: (state, action) => {
       console.log('Triggered getRecipes with payload:', action.payload);
       state.isLoading = true;
-      state.recipeData = []; // Clear previous data
+      state.recipeData = []; 
     },
     setRecipes: (state, action) => {
         state.recipeData.push(action.data);
         state.isLoading = false;
+    },
+    getRecipesDetail: (state, action) => {
+      console.log('Triggered getRecipesDetail with payload:', action.payload);
+      state.isLoadingDetail = true;
+      state.recipeDetailData = []; 
+    },
+    setRecipesDetail: (state, action) => {
+        state.recipeDetailData.push(action.data);
+        console.log("setRecipesDetail", action.data)
+        state.isLoadingDetail = false;
     },
     // fetchTasks: state => {
     //   state.loading = true;
@@ -38,7 +51,7 @@ export const RecipeSlice = createSlice({
 });
 
 // this is for dispatch
-export const { getRecipes, setRecipes } = RecipeSlice.actions;
+export const { getRecipes, setRecipes, getRecipesDetail, setRecipesDetail } = RecipeSlice.actions;
 
 // this is for configureStore
 export default RecipeSlice.reducer;
