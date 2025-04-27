@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 import { getRecipesDetail } from "../../redux/slices/recipes";
 import { useParams } from "react-router-dom";
 import recipeDetailSaga from "src/redux/saga/recipeDetailSaga";
+import {MdArrowBackIos} from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const RecipeDetail = () => {
   const { t } = useTranslation();
@@ -26,14 +30,18 @@ const RecipeDetail = () => {
   console.log("video", video);
   return (
     <>
-      {isLoadingDetail && (
+
+      {isLoadingDetail ? (
         <>
           <div className="flex justify-center items-center ">
             <DotLoader size={50} color="gray" loading={isLoadingDetail} />
           </div>
         </>
-      )}
+      ): (
+      <>
+
       <div className="p-6 m-2 w-full h-full bg-black text-white rounded-lg shadow-md">
+      <Link to="/" ><MdArrowBackIos/></Link>
         <div className="flex flex-col items-center justify-start">
           <h6 className="text-rose-400 size-20 text-3xl font-bold">
             {" "}
@@ -60,6 +68,8 @@ const RecipeDetail = () => {
           />
         </div>
       </div>
+      </>
+      )}
     </>
   );
 };

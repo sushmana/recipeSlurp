@@ -46,7 +46,7 @@ const Card = () => {
                   alt={meal.strMeal}
                   className="rounded-lg w-11/12 h-3/6 mb-4 shadow-shdw"
                 />
-                <p className="text-sm mb-2 pt-5 pb-40 line-clamp-3 overflow-y-scroll">
+                <p className="text-sm mb-2 pt-5 h-[200px] line-clamp-3 overflow-y-scroll">
                   {meal.strInstructions}
                 </p>
                 <div className="flex gap-2 mt-2 text-red-500">
