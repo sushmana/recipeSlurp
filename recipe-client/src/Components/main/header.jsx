@@ -10,7 +10,7 @@ const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   useEffect(()=>{
-    if ( searchTerm.length <= 0 || !isNaN(searchTerm) || searchTerm.includes(' ')){
+    if ( searchTerm.length <= 0 || !isNaN(searchTerm)){
       setButtonDisabled(true);
     }else{
       setButtonDisabled(false);
