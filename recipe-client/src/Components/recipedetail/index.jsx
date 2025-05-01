@@ -25,9 +25,8 @@ const RecipeDetail = () => {
     dispatch(getRecipesDetail(meal));
   }, []);
   // fetch Ingredients
-  const video =
-    recipesDetailData.length > 0 && recipesDetailData[0].meals[0].strYoutube;
-  console.log("video", video);
+  const videoId = recipesDetailData[0]?.meals[0]?.strYoutube.split("=")[1];
+ 
   return (
     <>
 
@@ -57,17 +56,25 @@ const RecipeDetail = () => {
           </p>
           <h3 className="mb-4 text-orange-300">Ingredients:</h3>
           {/* add ingredients */}
+          
+          {videoId ? (<>
           <h3 className="mb-4 text-orange-300">Video available:</h3>
-          <iframe
-          className="rounded-lg shadow-lg lg:w-[48%] lg:h-[400px] lg:mb-4"
-            src="https://www.youtube.com/embed/LWuuCndtJr0"
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            autoPlay
-          />
+          <div className="flex justify-center items-center rounded-lg shadow-shdw lg:w-[100%] h-auto lg:mb-4 mt-4">
+            <iframe
+              className="h-[500px] w-[900px] my-[20px]"
+              src={"https://www.youtube.com/embed/" + videoId}
+              title="YouTube video player"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+          </>
+        ) : (
+          <p className="text-red-500">Video not available</p>
+        )}
         </div>
       </div>
+     
       </>
       )}
     </>
