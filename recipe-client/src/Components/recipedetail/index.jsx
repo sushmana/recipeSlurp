@@ -26,7 +26,19 @@ const RecipeDetail = () => {
   }, []);
   // fetch Ingredients
   const videoId = recipesDetailData[0]?.meals[0]?.strYoutube.split("=")[1];
- 
+  const ingredients = recipesDetailData[0]?.meals.map((meal) => {
+    return Object.keys(meal)
+      .filter((key) => key.startsWith('strIngredient') && meal[key] && meal[key].trim() !== "")
+      .map((key) => meal[key]);
+  });  
+
+  const measures = recipesDetailData[0]?.meals.map((meal) => {
+    return Object.keys(meal)
+      .filter((key) => key.startsWith('strMeasure') && meal[key] && meal[key].trim() !== "")
+      .map((key) => meal[key]);
+  }); 
+
+  console.log(ingredients, measures);
   return (
     <>
 
@@ -56,6 +68,18 @@ const RecipeDetail = () => {
           </p>
           <h3 className="mb-4 text-orange-300">Ingredients:</h3>
           {/* add ingredients */}
+        <ul className='list-disc list-inside'>
+          {ingredients && ingredients.map((ingredient, index) => {
+            return ingredient.map((item, itemIndex) => {
+              return (
+                <li key={`${index}-${itemIndex}`} className="text-justify">
+                  {item} - {measures[0][index][itemIndex]}
+                </li>
+              );
+            });
+                
+          })}  
+        </ul>
           
           {videoId ? (<>
           <h3 className="mb-4 text-orange-300">Video available:</h3>
