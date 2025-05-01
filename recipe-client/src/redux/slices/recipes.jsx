@@ -30,6 +30,12 @@ export const RecipeSlice = createSlice({
         console.log("setRecipesDetail", action.data)
         state.isLoadingDetail = false;
     },
+    getRandomRecipes: (state, action) => {
+      console.log('Triggered getRandomRecipe with payload:', action.payload);
+      state.isLoading = true;
+      state.recipeData = []; 
+    },
+    
     // fetchTasks: state => {
     //   state.loading = true;
     // },
@@ -51,7 +57,7 @@ export const RecipeSlice = createSlice({
 });
 
 // this is for dispatch
-export const { getRecipes, setRecipes, getRecipesDetail, setRecipesDetail } = RecipeSlice.actions;
+export const { getRecipes, setRecipes, getRecipesDetail, setRecipesDetail, getRandomRecipes } = RecipeSlice.actions;
 
 // this is for configureStore
 export default RecipeSlice.reducer;
