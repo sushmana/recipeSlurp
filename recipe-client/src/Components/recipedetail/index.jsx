@@ -54,7 +54,7 @@ const RecipeDetail = () => {
       <div className="p-6 m-2 w-full h-full bg-black text-white rounded-lg shadow-md">
       <Link to="/" ><MdArrowBackIos/></Link>
         <div className="flex flex-col items-center justify-start">
-          <h6 className="text-rose-400 size-20 text-3xl font-bold">
+          <h6 className="text-rose-400 text-3xl font-bold">
             {" "}
             {recipesDetailData.length > 0 &&
               recipesDetailData[0].meals[0].strMeal}
@@ -68,18 +68,20 @@ const RecipeDetail = () => {
           </p>
           <h3 className="mb-4 text-orange-300">Ingredients:</h3>
           {/* add ingredients */}
-        <ul className='list-disc list-inside'>
-          {ingredients && ingredients.map((ingredient, index) => {
+           <div className="flex justify-center items-center rounded-lg shadow-shdw lg:w-[100%] h-auto lg:mb-4 mt-4 p-4">
+           <ul className='list-disc list-inside'>
+            {ingredients && ingredients.map((ingredient, index) => {
             return ingredient.map((item, itemIndex) => {
               return (
                 <li key={`${index}-${itemIndex}`} className="text-justify">
-                  {item} - {measures[0][index][itemIndex]}
+                  {item} - {measures[index][itemIndex]}
                 </li>
               );
             });
                 
           })}  
         </ul>
+        </div>
           
           {videoId ? (<>
           <h3 className="mb-4 text-orange-300">Video available:</h3>
