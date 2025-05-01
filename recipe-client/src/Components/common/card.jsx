@@ -13,7 +13,7 @@ const Card = () => {
   const recipes = useSelector((state) => state.recipeReducer.recipeData);
   const isLoading = useSelector((state) => state.recipeReducer.isLoading);
   const dispatch = useDispatch();
-  
+
   return (
     <>
     {isLoading && 
@@ -49,12 +49,15 @@ const Card = () => {
                 <p className="text-sm mb-2 pt-5 h-[200px] line-clamp-3 overflow-y-scroll">
                   {meal.strInstructions}
                 </p>
-                <div className="flex gap-2 mt-2 text-red-500">
-                  <MdFavoriteBorder />
-                  <MdFavorite />
-                  <Link to={`/recipeDetail/${meal.idMeal}`} className="text-blue-700 hover:underline" onClick={() => dispatch(getRecipesDetail,meal.idMeal)}>
-                    View Recipe
-                  </Link>
+                <div className="flex gap-24 mt-2 text-red-500">
+                  <MdFavoriteBorder className="w-[35px] h-[40px]" onClick={() => console.log("fav")} />
+                  {/* <MdFavorite className="w-[35px] h-[40px]" /> */}
+                  <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-purple-400">
+                    <Link to={`/recipeDetail/${meal.idMeal}`} className="text-white hover:underline" onClick={() => dispatch(getRecipesDetail(meal.idMeal))}>
+                      View Recipe
+                    </Link>
+                  </button>
+                  
                 </div>
                 
               </div>

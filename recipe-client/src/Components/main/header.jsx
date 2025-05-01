@@ -31,12 +31,12 @@ const Header = () => {
       <>  
       <div className='fixed top-0 left-0 w-full h-20 bg-black flex flex-col justify-center items-center z-10'>
       <div className='flex flex-row justify-center items-center gap-4 w-full max-w-4xl px-4'>
-           <input type='input' placeholder='Search' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} className='p-2 rounded-lg w-full max-w-md border border-gray-300hover:cursor-pointer'/>
-           <button type='submit' className='bg-red-500 rounded-2xl p-2 hover:bg-black-300' onClick={handleSearch} disabled={buttonDisabled}>
+           <input type='input' placeholder='Search' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} className='p-2 rounded-lg w-full max-w-md border border-gray-300 hover:cursor-pointer  hover:bg-purple-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50'/>
+           <button type='submit' className='bg-red-500 rounded-2xl p-2  hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' onClick={handleSearch} disabled={buttonDisabled}>
               <b><CiSearch className='text-white'/></b>
             </button>  
-            <span className='ml-40'> 
-              <button type='submit' className='bg-red-500 text-white rounded-2xl p-2 hover:bg-black-300' onClick={handleRandomRecipe}> Get Random Recipe </button>
+            <span className='ml-30 px-10'> 
+              <button type='submit' className='bg-red-500 text-white rounded-2xl p-2 hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ' onClick={handleRandomRecipe}> Random Recipe </button>
             </span>           
       </div>
        
