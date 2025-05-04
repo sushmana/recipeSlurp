@@ -6,7 +6,7 @@ const Recipe = () => {
   return (
     <div className="bg-black w-full h-screen flex flex-col">
       <Header />
-      <div className="flex-1 overflow-y-auto my-20 p-4">
+      <div className="flex-1 overflow-y-auto mt-40 p-4">
         <Card />
       </div>
     </div>
