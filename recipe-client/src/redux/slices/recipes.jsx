@@ -12,6 +12,7 @@ export const RecipeSlice = createSlice({
     favorites: [],
     allRecipe:[],
     allCategory:[],
+    isLoaddingCategory: false,
   },
   reducers: {
     getRecipes: (state, action) => {
@@ -50,8 +51,8 @@ export const RecipeSlice = createSlice({
 
     },
     setAllCategories: (state, action) => {
-      state.allCategory.push(action.data);
-      console.log("setAllCategory", action.data)
+      state.allCategory.push(action.data.categories);
+      console.log("setAllCategory", state.allCategory)
     }
 }
 });

@@ -44,7 +44,7 @@ function* getAllCategory() {
     try{
         let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/categories.php`)
         data = yield data.json();
-        yield put(setAllCategories(data.categories || []))
+        yield put({type: setAllCategories, data})
     }
     catch(e){
         console.error("Error while fetching the recipe data", e);

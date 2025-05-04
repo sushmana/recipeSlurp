@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { CiSearch } from "react-icons/ci"
-import {getRecipes, getRandomRecipes} from '../../redux/slices/recipes'
+import {getRecipes, getRandomRecipes,setRandomRecipe, getAllCategories } from '../../redux/slices/recipes'
 import { MdFavorite, MdOutlineFavoriteBorder, MdLightMode, MdDarkMode } from 'react-icons/md'
 import {Link} from 'react-router-dom'
-
+import {GiGrassMushroom} from 'react-icons/gi'
+import { getActiveElement } from '@testing-library/user-event/dist/utils'
 
 const Header = () => {
 
@@ -25,16 +26,37 @@ const Header = () => {
   }
 
   const handleRandomRecipe = () => {
+    // dispatch(setRandomRecipe('s'));
     dispatch(getRandomRecipes());
   }
+  
+  const handleCategoryChange = (e) => {
+    dispatch(getAllCategories());
+  }
 
+  const category = useSelector((state) => state.recipeReducer.allCategory);
+  const flattenedCategory = category.flat();
   return (
       <>  
       <div className='fixed top-0 left-0 w-full h-20 bg-black flex flex-col justify-center items-center z-10'>
+      <h1 className=" flex flex-row gap-2 text-orange-400 text-3xl mt-[60px] font-serif bg-blend-hard-light">Recipes <GiGrassMushroom className="text-green-300 text-3xl" /></h1>
       <div className='flex flex-row justify-center items-center gap-4 w-full max-w-4xl px-4'>
-            <span>
-              {/* <AutoComplete/>  for all category*/}
-            </span>
+            {/* <span className='flex flex-row gap-2'>
+            <label htmlFor="category" className="text-white font-bold">Select a Category:</label>
+            <select
+            name="category"
+            id="category"
+            title="Choose a category" // Adds a tooltip
+            onClick={() => dispatch(getAllCategories())}
+            onChange={handleCategoryChange}
+          >
+            {flattenedCategory.map((item, index) => (
+              <option key={index} value={item.strCategory}>
+                {item.strCategory}
+              </option>
+            ))}
+          </select>
+          </span> */}
            <input type='input' placeholder='Search' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} className='p-2 rounded-lg w-full max-w-md border border-gray-300 hover:cursor-pointer  hover:bg-purple-400 hover:text-white hover: placeholder-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50'/>
            <button type='submit' className='bg-red-500 rounded-2xl p-2  hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' onClick={handleSearch} disabled={buttonDisabled}>
               <b><CiSearch className='text-white'/></b>
