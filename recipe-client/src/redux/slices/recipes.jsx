@@ -9,6 +9,9 @@ export const RecipeSlice = createSlice({
     error: null,
     recipeDetailData: [],
     isLoadingDetail: false,
+    favorites: [],
+    allRecipe:[],
+    allCategory:[],
   },
   reducers: {
     getRecipes: (state, action) => {
@@ -35,29 +38,26 @@ export const RecipeSlice = createSlice({
       state.isLoading = true;
       state.recipeData = []; 
     },
+    setFavorites: (state, action) => {
     
-    // fetchTasks: state => {
-    //   state.loading = true;
-    // },
-    // fetchTasksSuccess: (state, action) => {
-    //   state.loading = false;
-    //   state.items = action.payload;
-    // },
-    // fetchTasksFailure: (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // },
-    // addTask: (state, action) => {
-    //   state.items.push(action.payload);
-    // },
-    // deleteTask: (state, action) => {
-    //   state.items = state.items.filter(task => task.id !== action.payload);
-    // },
+      state.favorites.push(action.payload);
+    },
+    getAllRecipes: (state, action) => {
+      console.log('Triggered getAllRecipe with payload:', action.payload);
+    },
+    getAllCategories: (state, action) => {  
+      console.log('Triggered getAllCategory with payload:', action.payload);
+
+    },
+    setAllCategories: (state, action) => {
+      state.allCategory.push(action.data);
+      console.log("setAllCategory", action.data)
+    }
 }
 });
 
 // this is for dispatch
-export const { getRecipes, setRecipes, getRecipesDetail, setRecipesDetail, getRandomRecipes } = RecipeSlice.actions;
+export const { getRecipes, setRecipes, getRecipesDetail, setRecipesDetail, getRandomRecipes,getAllRecipes, getAllCategories, setAllCategories } = RecipeSlice.actions;
 
 // this is for configureStore
 export default RecipeSlice.reducer;

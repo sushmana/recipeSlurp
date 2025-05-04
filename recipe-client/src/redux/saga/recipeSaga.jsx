@@ -1,6 +1,6 @@
 import { type } from '@testing-library/user-event/dist/type';
 import { takeEvery, put, call } from 'redux-saga/effects'
-import { getRecipes, setRecipes, getRandomRecipes } from 'src/redux/slices/recipes';
+import { getRecipes, setRecipes, getRandomRecipes,getAllRecipes, getAllCategories, setAllCategories } from 'src/redux/slices/recipes';
 
 function* getRecipe(action) {
 try{
@@ -22,6 +22,7 @@ function* getRandomRecipe() {
         let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/random.php`);
         data = yield data.json();
         console.warn("action is called", data)
+        if(data.meals.length>1) return;
         yield put({type: setRecipes, data}) 
     }
     catch(e){
@@ -29,9 +30,31 @@ function* getRandomRecipe() {
     }
 }
 
+function* getAllRecipe() {
+    try{
+        let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/`)
+        data = yield data.json();
+    }
+    catch(e){
+        console.error("Error while fetching the recipe data", e);
+    }
+}
+
+function* getAllCategory() {
+    try{
+        let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/categories.php`)
+        data = yield data.json();
+        yield put(setAllCategories(data.categories || []))
+    }
+    catch(e){
+        console.error("Error while fetching the recipe data", e);
+    }
+}
 function* recipeSaga() {
     yield takeEvery(getRecipes.type, getRecipe)
     yield takeEvery(getRandomRecipes.type, getRandomRecipe)
+    yield takeEvery(getAllRecipes.type, getAllRecipe)
+    yield takeEvery(getAllCategories.type, getAllCategory)
 }
 
 export default recipeSaga;

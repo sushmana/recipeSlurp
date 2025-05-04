@@ -5,22 +5,55 @@ import './card.css'
 import {PacmanLoader, DotLoader } from 'react-spinners';
 import { useTranslation } from "react-i18next";
 import {Link}  from "react-router-dom";
-import {getRecipesDetail} from '../../redux/slices/recipes'
+import {getRecipesDetail, getAllRecipe} from '../../redux/slices/recipes'
 
-const Card = () => {
+const Card = (props) => {
   const { t } = useTranslation();
 
   const recipes = useSelector((state) => state.recipeReducer.recipeData);
   const isLoading = useSelector((state) => state.recipeReducer.isLoading);
   const dispatch = useDispatch();
+  const [favorites, setFavorites] = useState([]);
 
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavorites(storedFavorites);
+
+    console.log("soter", storedFavorites)
+  },[]);
+  const existFavorites = (id) => {
+
+    const isFavorite = favorites.filter((fav) => fav.idMeal === id);
+
+    return isFavorite.length > 0;  
+  };
+    
+  const handleFavorites = (id, meal) => {
+    console.log(id)
+    console.log(meal)
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isFavorite = favorites.filter((fav) => fav.idMeal === id);
+
+     if(isFavorite.length > 0) {
+      const updatedFavorites = favorites.filter((fav) => fav.idMeal !== id);
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      console.log("Removed from favorites:", id);
+      setFavorites(updatedFavorites);
+    } else {
+      const updatedFavorites = [...favorites, { idMeal: id, meal:meal }];
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      console.log("Added to favorites:", id);
+      setFavorites(updatedFavorites);
+    }  
+  };
+    
   return (
     <>
     {isLoading && 
     (<>
     {/* <div className="spinner"/> */}
     <div className="flex justify-center items-center ">
-     <DotLoader size={50} color="gray" loading={isLoading} />
+     <PacmanLoader size={50} color="gray" loading={isLoading} />
     </div>
     </>
     )}
@@ -50,20 +83,18 @@ const Card = () => {
                   {meal.strInstructions}
                 </p>
                 <div className="flex gap-24 mt-2 text-red-500">
-                  <MdFavoriteBorder className="w-[35px] h-[40px]" onClick={() => console.log("fav")} />
-                  {/* <MdFavorite className="w-[35px] h-[40px]" /> */}
+                  { existFavorites(meal.idMeal) ? <MdFavorite className="w-[35px] h-[40px]" onClick={() => handleFavorites(meal.idMeal, meal)}/> : <MdFavoriteBorder className="w-[35px] h-[40px]" title="Add to favorites" onClick={() => handleFavorites(meal.idMeal,meal)} />}
                   <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-purple-400">
-                    <Link to={`/recipeDetail/${meal.idMeal}`} className="text-white hover:underline" onClick={() => dispatch(getRecipesDetail(meal.idMeal))}>
+                    <Link to={`/recipeDetail/${meal.idMeal}`} className="text-white hover:underline">
                       View Recipe
                     </Link>
                   </button>
                   
                 </div>
-                
               </div>
             ));
           })}
-      </div>
+    </div>
     </>
   );
 };

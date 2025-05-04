@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import "./recipedetail.css";
+import './recipedetail.css'
 import { DotLoader } from "react-spinners";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -19,26 +19,32 @@ const RecipeDetail = () => {
   const recipesData = useSelector((state) => state.recipeReducer);
   const recipesDetailData = recipesData.recipeDetailData;
   const isLoadingDetail = recipesData.isLoadingDetail;
+
+  const [videoId, setVideoId] = useState(null);
+  const [ingredients, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
   const meal = useParams();
 
   useEffect(() => {
+    if(!meal) return;
     dispatch(getRecipesDetail(meal));
-  }, []);
-  // fetch Ingredients
-  const videoId = recipesDetailData[0]?.meals[0]?.strYoutube.split("=")[1];
-  const ingredients = recipesDetailData[0]?.meals.map((meal) => {
-    return Object.keys(meal)
-      .filter((key) => key.startsWith('strIngredient') && meal[key] && meal[key].trim() !== "")
-      .map((key) => meal[key]);
-  });  
+  }, [meal]);
 
-  const measures = recipesDetailData[0]?.meals.map((meal) => {
-    return Object.keys(meal)
-      .filter((key) => key.startsWith('strMeasure') && meal[key] && meal[key].trim() !== "")
-      .map((key) => meal[key]);
-  }); 
+  useEffect(() => {
+    if (recipesDetailData.length === 0) return;
+    setVideoId(recipesDetailData[0]?.meals[0]?.strYoutube?.split("=")[1]);
+    setIngredients(recipesDetailData[0]?.meals?.map((meal) => {
+      return Object.keys(meal)
+        .filter((key) => key.startsWith('strIngredient') && meal[key] && meal[key].trim() !== "")
+        .map((key) => meal[key]);
+    }));
+    setMeasures(recipesDetailData[0]?.meals?.map((meal) => {
+      return Object.keys(meal)
+        .filter((key) => key.startsWith('strMeasure') && meal[key] && meal[key].trim() !== "")
+        .map((key) => meal[key]);
+    }));
+  },[recipesDetailData]);
 
-  console.log(ingredients, measures);
   return (
     <>
 
@@ -51,22 +57,23 @@ const RecipeDetail = () => {
       ): (
       <>
 
-      <div className="p-6 m-2 w-full h-full bg-black text-white rounded-lg shadow-md">
+      <div className="p-6 w-full h-full bg-black text-white rounded-lg shadow-md">
       <Link to="/" ><MdArrowBackIos/></Link>
-        <div className="flex flex-col items-center justify-start">
-          <h6 className="text-rose-400 text-3xl font-bold">
-            {" "}
+        <div className="flex items-center justify-center gap-10">
+          <h6 className="text-rose-400 text-3xl font-bold ">
             {recipesDetailData.length > 0 &&
               recipesDetailData[0].meals[0].strMeal}
-          </h6>
-        </div>
+          </h6><div className="flex justify-end">
+          <MdFavoriteBorder className="text-rose-400 w-[35px] h-[40px] hover:cursor-pointer" title="Add to favorites"/></div>
+         </div>
+         
         <div className="flex flex-col items-start mt-4 mb-4 text-white">
-          <h3 className="mb-4 text-orange-300">Instructions:</h3>
-          <p className="text-justify">
+          <h3 className="mb-4 text-orange-300 text-2xl">Instructions:</h3>
+          <p className="text-justify shadow-shdw lg:w-[100%] h-auto lg:mb-4 mt-4 p-4">
             {recipesDetailData.length > 0 &&
               recipesDetailData[0].meals[0].strInstructions}
           </p>
-          <h3 className="mb-4 text-orange-300">Ingredients:</h3>
+          <h3 className="mb-4 text-orange-300 text-2xl" >Ingredients:</h3>
           {/* add ingredients */}
            <div className="flex justify-center items-center rounded-lg shadow-shdw lg:w-[100%] h-auto lg:mb-4 mt-4 p-4">
            <ul className='list-disc list-inside'>
@@ -84,7 +91,7 @@ const RecipeDetail = () => {
         </div>
           
           {videoId ? (<>
-          <h3 className="mb-4 text-orange-300">Video available:</h3>
+          <h3 className="mb-4 text-orange-300 text-2xl">Video available:</h3>
           <div className="flex justify-center items-center rounded-lg shadow-shdw lg:w-[100%] h-auto lg:mb-4 mt-4">
             <iframe
               className="h-[500px] w-[900px] my-[20px]"
