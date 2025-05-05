@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/recipeSlurp/static/css/main.772b9c26.css",
-    "main.js": "/recipeSlurp/static/js/main.54cb12b4.js",
-    "static/media/logo.svg": "/recipeSlurp/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
-    "index.html": "/recipeSlurp/index.html",
-    "main.772b9c26.css.map": "/recipeSlurp/static/css/main.772b9c26.css.map",
-    "main.54cb12b4.js.map": "/recipeSlurp/static/js/main.54cb12b4.js.map"
+    "main.css": "/sushmana/recipeSlurp/static/css/main.772b9c26.css",
+    "main.js": "/sushmana/recipeSlurp/static/js/main.89e942d1.js",
+    "static/media/logo.svg": "/sushmana/recipeSlurp/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/sushmana/recipeSlurp/index.html",
+    "main.772b9c26.css.map": "/sushmana/recipeSlurp/static/css/main.772b9c26.css.map",
+    "main.89e942d1.js.map": "/sushmana/recipeSlurp/static/js/main.89e942d1.js.map"
   },
   "entrypoints": [
     "static/css/main.772b9c26.css",
-    "static/js/main.54cb12b4.js"
+    "static/js/main.89e942d1.js"
   ]
 }
