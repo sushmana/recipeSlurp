@@ -1,54 +1,94 @@
-import React, {useState, useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import { CiSearch } from "react-icons/ci"
-import {getRecipes, getRandomRecipes,setRandomRecipe, getAllCategories } from '../../redux/slices/recipes'
-import { MdFavorite, MdOutlineFavoriteBorder, MdLightMode, MdDarkMode } from 'react-icons/md'
-import {Link} from 'react-router-dom'
-import {GiGrassMushroom} from 'react-icons/gi'
-import { getActiveElement } from '@testing-library/user-event/dist/utils'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { CiSearch } from "react-icons/ci";
+import {
+  getRecipes,
+  getRandomRecipes,
+  getAllCategories,
+} from "../../redux/slices/recipes";
+import {
+  MdOutlineFavoriteBorder,
+  MdLightMode,
+  MdDarkMode,
+} from "react-icons/md";
+import { Link } from "react-router-dom";
+import { GiGrassMushroom } from "react-icons/gi";
+import {wave} from '../../asset/images/wave.svg';
+import './header.css';
 
 const Header = () => {
-
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  useEffect(()=>{
-    if ( searchTerm.length <= 0 || !isNaN(searchTerm)){
-      setButtonDisabled(true);
-    }else{
-      setButtonDisabled(false);
-    }
-  }
-  , [searchTerm]);
-
-  const handleSearch = () =>{
-    dispatch(getRecipes(searchTerm));
-  }
-
-  const handleRandomRecipe = () => {
-    // dispatch(setRandomRecipe('s'));
-    dispatch(getRandomRecipes());
-  }
-  
-  const handleCategoryChange = (e) => {
-    dispatch(getAllCategories());
-  }
+  const [isMobile, setIsMobile] = useState(false);
 
   const category = useSelector((state) => state.recipeReducer.allCategory);
   const flattenedCategory = category.flat();
+
+  useEffect(() => {
+    if (searchTerm.length <= 0 || !isNaN(searchTerm)) {
+      setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
+    }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize(); // Check on initial render
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleSearch = () => {
+    dispatch(getRecipes(searchTerm));
+  };
+
+  const handleRandomRecipe = () => {
+    dispatch(getRandomRecipes());
+  };
+  useEffect(()=>{
+    dispatch(getAllCategories());
+  },[])
+  
+
   return (
-      <>  
-      <div className='fixed top-0 left-0 w-full h-20 flex flex-col justify-center items-center z-10'>
-      <h1 className=" flex flex-row gap-2 text-orange-400 text-3xl mt-[60px] font-serif bg-blend-hard-light">Recipes <GiGrassMushroom className="text-green-300 text-3xl" /></h1>
-      <div className='flex flex-row justify-center items-center gap-4 w-full max-w-4xl px-4'>
-            {/* <span className='flex flex-row gap-2'>
-            <label htmlFor="category" className="text-black font-bold">Select a Category:</label>
-            <select
+    <>
+   
+    <header className="fixed top-0 left-0 w-full h-[350px] p-[10px] shadow-md z-10 header-bg">
+      <div className="flex flex-row py-4">
+        {/* Logo */}
+        <h1 className="flex gap-2 text-black text-3xl font-serif">
+          Slurpp <GiGrassMushroom className="text-green-300 text-3xl" />
+        </h1>
+  
+          {/* Random Recipe Button */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 w-full">
+          <button
+          type="button"
+          className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+          onClick={handleRandomRecipe}
+        >
+          Random
+        </button>
+        {/* Favorites Link */}
+        <Link
+              to={`/favoriteDetail`}
+            >
+              <h1 className="text-black  font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+                Favorites
+              </h1>
+              {/* <MdOutlineFavoriteBorder className="text-black w-[35px] h-[40px] border-b-[5px] rounded-[4px] hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50" /> */}
+        </Link>
+      {/* Select Category */}
+        <select
             name="category"
             id="category"
-            title="Choose a category" // Adds a tooltip
-            onClick={() => dispatch(getAllCategories())}
-            onChange={handleCategoryChange}
+            title="Choose a category"
+            className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
           >
             {flattenedCategory.map((item, index) => (
               <option key={index} value={item.strCategory}>
@@ -56,32 +96,36 @@ const Header = () => {
               </option>
             ))}
           </select>
-          </span> */}
-           <input type='input' placeholder='Search' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} className='p-2 rounded-lg w-full sm:w-[48%] md:w-[30%] max-w-md border border-gray-300 hover:cursor-pointer  hover:bg-purple-400 hover:text-black hover: placeholder-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50'/>
-           <button type='submit' className='bg-red-500 rounded-2xl p-2  hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' onClick={handleSearch} disabled={buttonDisabled}>
-              <b><CiSearch className='text-black'/></b>
-            </button>  
-            <span className='ml-30 px-10'> 
-              <button type='submit' className='bg-red-500 text-black rounded-2xl border-b-[5px] p-2 hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ' onClick={handleRandomRecipe}> Random Recipe </button>
-            </span>  
+        </div>
+
+        {/* Search Bar */}
+        <div className="flex flex-col sm:flex-row justify-end gap-2 w-full">
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="p-2 rounded-lg w-full sm:w-[48%] md:w-[30%] max-w-md border border-gray-300 hover:cursor-pointer hover:bg-purple-400 hover:text-black hover:placeholder-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+          />
+          <button
+            type="submit"
+            
+            onClick={handleSearch}
+            disabled={buttonDisabled}
+          >
+            <CiSearch className="text-black w-[25px] h-[30px] " />
+          </button>
+          
+          <button className="w-[35px] h-[40px] text-amber-400 ml-[10px]">
+              {true ? <MdDarkMode className="w-[25px] h-[30px]" /> : <MdLightMode className="w-[25px] h-[30px]"/>}
+            </button>
+        </div>
         
-            <span className='ml-30 px-10'> 
-            <Link to={`/favoriteDetail`} className="text-black hover:underline ">
-                      <MdOutlineFavoriteBorder className='text bg-red-500 w-[35px] h-[40px] border-b-[5px] rounded-[4px] hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 '/>
-            </Link>
-            </span>   
-
-            <span>
-            {/* <MdDarkMode className='w-[35px] h-[40px] text-gray-950'/> */}
-            <MdLightMode className='w-[35px] h-[40px] text-amber-400'/>
-            </span>      
       </div>
-       
-      </div>
-      
-      </>
-    
-  )
-}
 
-export default Header
+    </header>
+    </>
+  );
+};
+
+export default Header;
