@@ -21,6 +21,8 @@ export const RecipeSlice = createSlice({
       state.recipeData = []; 
     },
     setRecipes: (state, action) => {
+        state.recipeData.push(action.payload);
+        state.isLoading = false;
       state.recipeData.push(action.payload);
       state.isLoading = false;
     },
@@ -30,6 +32,8 @@ export const RecipeSlice = createSlice({
       state.recipeDetailData = []; 
     },
     setRecipesDetail: (state, action) => {
+        state.recipeDetailData.push(action.payload);
+        console.log("setRecipesDetail", action.payload)
         state.recipeDetailData.push(action.payload);
         console.log("setRecipesDetail", action.payload)
         state.isLoadingDetail = false;

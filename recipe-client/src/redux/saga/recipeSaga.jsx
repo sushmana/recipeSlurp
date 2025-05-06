@@ -10,6 +10,7 @@ try{
     data = yield data.json();
     console.warn("action is called", data)
     yield put(setRecipes(data)) //setRecipes(data.meals || [])
+    yield put(setRecipes(data)) //setRecipes(data.meals || [])
     
 }
 catch(e){
@@ -43,6 +44,7 @@ function* getAllCategory() {
     try{
         let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/categories.php`)
         data = yield data.json();
+        yield put(setAllCategories(data))
         yield put(setAllCategories(data))
     }
     catch(e){
