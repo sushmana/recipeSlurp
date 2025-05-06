@@ -25,16 +25,11 @@ function App() {
     // </div>
 
     <>
-    {/* <Navbar /> */}
+  
     <Routes>
     <Route path="/" element={<Main />} />
     <Route path="/recipeDetail/:id" element={<RecipeDetail />} />
     <Route path="/favoriteDetail" element={<FavoriteDetail />} />
-    {/* <Route index element={<Home />} />
-    <Route path="blogs" element={<Blogs />} />
-    <Route path="contact" element={<Contact />} />
-    <Route path="about" element={<About />} />
-    <Route path="*" element={<NoPage />} /> */}
     </Routes>
     </>
   );

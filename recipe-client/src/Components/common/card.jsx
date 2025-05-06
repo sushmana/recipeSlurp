@@ -57,7 +57,7 @@ const Card = (props) => {
     </div>
     </>
     )}
-    <div className="flex flex-wrap justify-center gap-6 p-6 bg-black rounded-lg shadow-md">
+    <div className="flex flex-wrap justify-center gap-6 p-6  rounded-lg shadow-md">
     {recipes.length > 0 &&
           !isLoading &&
           recipes.map((data, index) => {
@@ -84,8 +84,8 @@ const Card = (props) => {
                 </p>
                 <div className="flex gap-24 mt-2 text-red-500">
                   { existFavorites(meal.idMeal) ? <MdFavorite className="w-[35px] h-[40px]" onClick={() => handleFavorites(meal.idMeal, meal)}/> : <MdFavoriteBorder className="w-[35px] h-[40px]" title="Add to favorites" onClick={() => handleFavorites(meal.idMeal,meal)} />}
-                  <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-purple-400">
-                    <Link to={`/recipeDetail/${meal.idMeal}`} className="text-white hover:underline">
+                  <button className="bg-red-500 text-black px-2 py-1 rounded hover:bg-purple-400">
+                    <Link to={`/recipeDetail/${meal.idMeal}`} className="text-black hover:underline">
                       View Recipe
                     </Link>
                   </button>

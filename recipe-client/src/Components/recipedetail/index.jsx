@@ -57,7 +57,7 @@ const RecipeDetail = () => {
       ): (
       <>
 
-      <div className="p-6 w-full h-full bg-black text-white rounded-lg shadow-md">
+      <div className="p-6 w-full h-full  text-black rounded-lg shadow-md">
       <Link to="/" ><MdArrowBackIos/></Link>
         <div className="flex items-center justify-center gap-10">
           <h6 className="text-rose-400 text-3xl font-bold ">
@@ -67,7 +67,7 @@ const RecipeDetail = () => {
           <MdFavoriteBorder className="text-rose-400 w-[35px] h-[40px] hover:cursor-pointer" title="Add to favorites"/></div>
          </div>
          
-        <div className="flex flex-col items-start mt-4 mb-4 text-white">
+        <div className="flex flex-col items-start mt-4 mb-4 text-black">
           <h3 className="mb-4 text-orange-300 text-2xl">Instructions:</h3>
           <p className="text-justify shadow-shdw lg:w-[100%] h-auto lg:mb-4 mt-4 p-4">
             {recipesDetailData.length > 0 &&

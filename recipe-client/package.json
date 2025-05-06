@@ -1,7 +1,7 @@
 {
   "name": "recipe-client",
   "version": "0.1.0",
-  "homepage": "https://sushmana.github.io/Recipe-App",
+  "homepage": "https://sushmana.github.io/recipeSlurp/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",

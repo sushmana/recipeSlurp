@@ -21,8 +21,8 @@ export const RecipeSlice = createSlice({
       state.recipeData = []; 
     },
     setRecipes: (state, action) => {
-        state.recipeData.push(action.data);
-        state.isLoading = false;
+      state.recipeData.push(action.payload);
+      state.isLoading = false;
     },
     getRecipesDetail: (state, action) => {
       console.log('Triggered getRecipesDetail with payload:', action.payload);
@@ -30,8 +30,8 @@ export const RecipeSlice = createSlice({
       state.recipeDetailData = []; 
     },
     setRecipesDetail: (state, action) => {
-        state.recipeDetailData.push(action.data);
-        console.log("setRecipesDetail", action.data)
+        state.recipeDetailData.push(action.payload);
+        console.log("setRecipesDetail", action.payload)
         state.isLoadingDetail = false;
     },
     getRandomRecipes: (state, action) => {
@@ -51,8 +51,7 @@ export const RecipeSlice = createSlice({
 
     },
     setAllCategories: (state, action) => {
-      state.allCategory.push(action.data.categories);
-      console.log("setAllCategory", state.allCategory)
+      state.allCategory.push(action.payload.categories);
     }
 }
 });

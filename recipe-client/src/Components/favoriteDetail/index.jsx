@@ -8,8 +8,8 @@ const favoriteDetail = () => {
       return (
        <>
       
-      <h1 className='text-white text-3xl font-bold bg-black text-center pt-4'>Favorite Recipes</h1>
-      <div className="flex flex-wrap justify-center gap-6 p-6 bg-black">
+      <h1 className='text-black text-3xl font-bold  text-center pt-4'>Favorite Recipes</h1>
+      <div className="flex flex-wrap justify-center gap-6 p-6 ">
             {favoriteRecipe.length > 0 ? (
                   favoriteRecipe.map((recipe,index) => 
                {
@@ -32,8 +32,8 @@ const favoriteDetail = () => {
                 </p>
                 <div className="flex gap-24 mt-2 text-red-500">
                   {/* { existFavorites(recipe.meal.idMeal) ? <MdFavorite className="w-[35px] h-[40px]" onClick={() => handleFavorites(recipe.meal.idMeal, recipe.meal)}/> : <MdFavoriteBorder className="w-[35px] h-[40px]" title="Add to favorites" onClick={() => handleFavorites(recipe.meal.idMeal,recipe.meal)} />} */}
-                  <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-purple-400">
-                    <Link to={`/recipeDetail/${recipe.meal.idMeal}`} className="text-white hover:underline">
+                  <button className="bg-red-500 text-black px-2 py-1 rounded hover:bg-purple-400">
+                    <Link to={`/recipeDetail/${recipe.meal.idMeal}`} className="text-black hover:underline">
                       View Recipe
                     </Link>
                   </button>
@@ -44,7 +44,7 @@ const favoriteDetail = () => {
                )}
             )
             ) : (
-               <div className="text-white text-center">No favorite recipes found.</div>
+               <div className="text-black text-center">No favorite recipes found.</div>
             )}
       </div>
        </>
