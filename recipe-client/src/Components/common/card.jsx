@@ -13,7 +13,7 @@ const Card = (props) => {
   const { t } = useTranslation();
 
   const recipes = useSelector((state) => state.recipeReducer.recipeData);
-  const isLoading = useSelector((state) => state.recipeReducer.isLoading);
+   const isLoading = useSelector((state) => state.recipeReducer.isLoading);
   const dispatch = useDispatch();
   const [favorites, setFavorites] = useState([]);
 

@@ -7,6 +7,9 @@ module.exports = {
     extend: {},
     boxShadow: {
       shdw: '0px 0px 14px 2px gray',
+    },
+    screens:{
+      mobile: '430px',
     }
   },
   plugins: [],
