@@ -12,6 +12,7 @@ import {MdArrowBackIos} from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import loader from "../../asset/images/loader.gif";
 
 const RecipeDetail = () => {
   const { t } = useTranslation();
@@ -51,7 +52,9 @@ const RecipeDetail = () => {
       {isLoadingDetail ? (
         <>
           <div className="flex justify-center items-center ">
-            <DotLoader size={50} color="gray" loading={isLoadingDetail} />
+            {/*<DotLoader size={50} color="gray" loading={isLoadingDetail} />*/}
+            <img src={loader} alt="loader"  style={{width:'70vh'}} className={'img-fluid'} />
+
           </div>
         </>
       ): (

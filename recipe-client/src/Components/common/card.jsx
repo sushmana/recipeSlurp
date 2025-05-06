@@ -6,6 +6,8 @@ import {PacmanLoader, DotLoader } from 'react-spinners';
 import { useTranslation } from "react-i18next";
 import {Link}  from "react-router-dom";
 import {getRecipesDetail, getAllRecipe} from '../../redux/slices/recipes'
+import loader from 'src/asset/images/loader.gif'
+
 
 const Card = (props) => {
   const { t } = useTranslation();
@@ -53,7 +55,8 @@ const Card = (props) => {
     (<>
     {/* <div className="spinner"/> */}
     <div className="flex justify-center items-center ">
-     <PacmanLoader size={50} color="gray" loading={isLoading} />
+      <img src={loader} alt="loader"  style={{width:'70vh'}} className={'img-fluid'} />
+     {/*<PacmanLoader size={50} color="gray" loading={isLoading} />*/}
     </div>
     </>
     )}
