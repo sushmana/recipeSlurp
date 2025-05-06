@@ -1,14 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Card from '../common/card';
 import {Link} from 'react-router-dom';
+import './favoriteDetail.css';
+import { MdFavorite } from 'react-icons/md';
 
 const favoriteDetail = () => {
       const favoriteRecipe = JSON.parse(localStorage.getItem("favorites")) || [];
       console.log("favorite", favoriteRecipe)
+    
+    const handleRemoveFavorites = (id) => {
+            const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+            const updatedFavorites = favorites.filter((fav) => fav.idMeal !== id);
+            localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      }
       return (
        <>
       
-      <h1 className='text-black text-3xl font-bold  text-center pt-4'>Favorite Recipes</h1>
+      <h1 className='text-black text-3xl font-bold text-center pt-4 header-bg h-[350px]'>Favorite Recipes</h1>
       <div className="flex flex-wrap justify-center gap-6 p-6 ">
             {favoriteRecipe.length > 0 ? (
                   favoriteRecipe.map((recipe,index) => 
@@ -30,15 +38,14 @@ const favoriteDetail = () => {
                 <p className="text-sm mb-2 pt-5 h-[200px] line-clamp-3 overflow-y-scroll">
                   {recipe.meal.strInstructions}
                 </p>
-                <div className="flex gap-24 mt-2 text-red-500">
-                  {/* { existFavorites(recipe.meal.idMeal) ? <MdFavorite className="w-[35px] h-[40px]" onClick={() => handleFavorites(recipe.meal.idMeal, recipe.meal)}/> : <MdFavoriteBorder className="w-[35px] h-[40px]" title="Add to favorites" onClick={() => handleFavorites(recipe.meal.idMeal,recipe.meal)} />} */}
-                  <button className="bg-red-500 text-black px-2 py-1 rounded hover:bg-purple-400">
-                    <Link to={`/recipeDetail/${recipe.meal.idMeal}`} className="text-black hover:underline">
-                      View Recipe
-                    </Link>
-                  </button>
-                  
-                </div>
+               <div className="flex items-center gap-3.5 mt-2 text-white bg-black rounded-3xl px-10 ">
+                                 
+                              <Link to={`/recipeDetail/${recipe.meal.idMeal}`}>
+                                See Complete Recipe
+                              </Link>
+                              <MdFavorite className="w-[35px] h-[40px] justify-start text-red-500" onClick={() => handleRemoveFavorites(recipe.meal.idMeal)} /> 
+                            
+                          </div>
               </div>
                   </>
                )}

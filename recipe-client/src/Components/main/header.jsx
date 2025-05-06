@@ -66,7 +66,24 @@ const Header = () => {
         </h1>
   
           {/* Random Recipe Button */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 w-full">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 w-full ml-[60px]">
+           {/* Home */}
+        <h1   className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          Home
+        </h1>
+        {/* About */}
+        <h1   className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          About
+        </h1>
+        {/* Blog */}
+        <h1   className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          Blog
+        </h1>
+        {/* Contact */}
+        <h1   className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50">
+          Contact
+        </h1>
+
           <button
           type="button"
           className="text-black font-bold rounded-2xl border-b-[5px] p-2 hover:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
@@ -97,7 +114,7 @@ const Header = () => {
             ))}
           </select>
         </div>
-
+        
         {/* Search Bar */}
         <div className="flex flex-col sm:flex-row justify-end gap-2 w-full">
           <input
@@ -105,7 +122,7 @@ const Header = () => {
             placeholder="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 rounded-lg w-full sm:w-[48%] md:w-[30%] max-w-md border border-gray-300 hover:cursor-pointer hover:bg-purple-400 hover:text-black hover:placeholder-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
+            className="p-2 rounded-lg w-full lg:w-[50%] border border-gray-300 hover:cursor-pointer hover:bg-purple-400 hover:text-black hover:placeholder-black focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50"
           />
           <button
             type="submit"
