@@ -9,7 +9,7 @@ try{
     let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`);
     data = yield data.json();
     console.warn("action is called", data)
-    yield put({type: setRecipes, data}) //setRecipes(data.meals || [])
+    yield put(setRecipes(data)) //setRecipes(data.meals || [])
     
 }
 catch(e){
@@ -23,7 +23,7 @@ function* getRandomRecipe() {
         data = yield data.json();
         console.warn("action is called", data)
         if(data.meals.length>1) return;
-        yield put({type: setRecipes, data}) 
+        yield put(setRecipes(data))
     }
     catch(e){
         console.error("Error while fetching the recipe data", e);
@@ -44,7 +44,7 @@ function* getAllCategory() {
     try{
         let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/categories.php`)
         data = yield data.json();
-        yield put({type: setAllCategories, data})
+        yield put(setAllCategories(data))
     }
     catch(e){
         console.error("Error while fetching the recipe data", e);

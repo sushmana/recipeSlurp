@@ -9,7 +9,7 @@ try{
     let data = yield call(fetch, `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
     data = yield data.json();
     console.warn("action detail is called", data)
-    yield put({type: setRecipesDetail, data}) //setRecipes(data.meals || [])
+    yield put(setRecipesDetail(data)) //setRecipes(data.meals || [])
     
 }
 catch(e){
